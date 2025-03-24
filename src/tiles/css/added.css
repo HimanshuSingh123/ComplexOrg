@@ -1,0 +1,58 @@
+.task{
+    color: lightgray;
+    display: flex;
+    background-color: lightslategray;
+    width: 90%;
+    height: 100%;
+    padding-left: 10px;
+    align-items: center;
+}
+
+.Tile{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 50px;
+    background-color: lightslategray;
+    border-top: solid;
+}
+
+.buttons{
+    display: flex;
+}
+
+.task:hover{
+    background-color: grey;
+    border-style: dashed;
+}
+
+.checkB{
+    background-color: lightgreen;
+    height: 50px;
+    width: 50px;
+}
+
+.checkB:hover{
+    background-color: green;
+}
+
+.removeB{
+    background-color: lightpink;
+    height: 50px;
+    width: 50px;
+}
+
+.removeB:hover{
+    background-color: red;
+}
+
+.undoB{
+    height: 50px;
+    width: 50px;
+    background-color: darkseagreen;
+}
+
+.undoB:hover{
+    background-color: seagreen;
+}
+
