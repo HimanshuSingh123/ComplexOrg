@@ -1,0 +1,50 @@
+.popup{
+    height: 600px;
+    width: 450px;
+    background-color: grey;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navBar{
+  width: 100%;
+  height: 23px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.taskTitle{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.popupDescription{
+  width: 95%;
+  height: 200px;
+  background-color: white;
+  border-radius: 10px;
+}
+.supportInput{
+  display: flex;
+  margin-top: 10px;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+}
+.popupImages{
+    background-color: white;
+    height: 100%;
+    width: 170px;
+    border-radius: 10px;
+
+}
+
+.popupLinks{
+    background-color: white;
+    height: 270px;
+    width: 130px;
+    border-radius: 10px;
+
+}

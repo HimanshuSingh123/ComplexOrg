@@ -45,7 +45,7 @@ function App() {
   }
 
   const removeFromDoneList = (existingItem) => {
-    setDoneList(dones => dones.filter(done => done.id ==! existingItem.id));
+    setDoneList(dones => dones.filter(done => done.id !== existingItem.id));
   }
 
   return (
