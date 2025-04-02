@@ -1,6 +1,6 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
-function popUp(props){
+function PopUp(props){
 
     const title = props.title
 
@@ -14,18 +14,22 @@ function popUp(props){
         setIsOpen(!false)
     }
 
+    useEffect(() => {
+      openFunction();
+    }, []);
+
     return (
-        <div className="popup">
+        isOpen && <div className="popup">
           <div className="navBar">
             <button>Ⓧ</button>
           </div>
     
           <div className="taskTitle">
-            <h2>Title1</h2>
+            <h2>{title}</h2>
           </div>
     
           <div className="popupDescription">
-            {/* Description content here */}
+            <input type="text" placeholder="Add Information..." />
           </div>
     
           <div className="supportInput">
@@ -40,3 +44,5 @@ function popUp(props){
         </div>
       );
 }
+
+export default PopUp;

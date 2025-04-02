@@ -1,12 +1,16 @@
 import { useState } from 'react'
 import { use } from 'react'
 import React from 'react';
+import popUp from './popup'
 import "./css/added.css";
+import PopUp from './popup';
 
 function Tile(props){
 
 let buttonSection;
 let buttonSection2;
+const [showPopup, setShowPopup] = useState(false);
+
 console.log(props.type)
 if(props.type === 1){
     buttonSection = (
@@ -52,17 +56,19 @@ else if(props.type === 2){
 }
 
 return(
-<div className='Tile'>
-    <div className='task'>
-        {props.object.text}
+<>
+    <div className='Tile'>
+        <div onClick={() => setShowPopup(true)} className='task'>
+            {props.object.text}
+        </div>
+        <div className='buttons'>
+            {buttonSection}
+            {buttonSection2}
+        </div>
     </div>
-    <div className='buttons'>
-        {buttonSection}
-        {buttonSection2}
-    </div>
-</div>
+    { showPopup && <PopUp title={props.object.text}/>}
+</>
 );
-
 }
 
 export default Tile;
