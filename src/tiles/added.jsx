@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { use } from 'react'
 import React from 'react';
-import popUp from './popup'
 import "./css/added.css";
 import PopUp from './popup';
 
@@ -10,6 +9,10 @@ function Tile(props){
 let buttonSection;
 let buttonSection2;
 const [showPopup, setShowPopup] = useState(false);
+
+const onClose = () =>{
+    setShowPopup(false);
+}
 
 console.log(props.type)
 if(props.type === 1){
@@ -66,7 +69,7 @@ return(
             {buttonSection2}
         </div>
     </div>
-    { showPopup && <PopUp title={props.object.text}/>}
+    { showPopup && <PopUp title={props.object.text} onClose={onClose}/>}
 </>
 );
 }

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react"
+import ReactDOM from 'react-dom'
+import "./css/popup.css"
 
 function PopUp(props){
 
@@ -18,30 +20,33 @@ function PopUp(props){
       openFunction();
     }, []);
 
-    return (
-        isOpen && <div className="popup">
-          <div className="navBar">
-            <button>Ⓧ</button>
+    return ReactDOM.createPortal(
+        isOpen && <div onClick={props.onClose} className="popupOverlay">
+            <div className="popup" onClick={e => e.stopPropagation()}>
+              <div className="navBar">
+                <button onClick={props.onClose} >Ⓧ</button>
+              </div>
+        
+              <div className="taskTitle">
+                <h2>{title}</h2>
+              </div>
+        
+              <div className="popupDescription">
+                <textarea className="mainInput" placeholder="Add Information..." />
+              </div>
+        
+              <div className="supportInput">
+                <div className="popupImages">
+                  {/* Image content here */}
+                </div>
+        
+                <div className="popupLinks">
+                  {/* Links content here */}
+                </div>
+              </div>
           </div>
-    
-          <div className="taskTitle">
-            <h2>{title}</h2>
-          </div>
-    
-          <div className="popupDescription">
-            <input type="text" placeholder="Add Information..." />
-          </div>
-    
-          <div className="supportInput">
-            <div className="popupImages">
-              {/* Image content here */}
-            </div>
-    
-            <div className="popupLinks">
-              {/* Links content here */}
-            </div>
-          </div>
-        </div>
+        </div>,
+        document.getElementById('modal-root')
       );
 }
 
