@@ -9,6 +9,11 @@ function Tile(props){
 let buttonSection;
 let buttonSection2;
 const [showPopup, setShowPopup] = useState(false);
+const [tileDescription, setTileDescription] = useState('');
+
+const handleTileDescription = (text) => {
+    setTileDescription(text)
+}
 
 const onClose = () =>{
     setShowPopup(false);
@@ -69,7 +74,7 @@ return(
             {buttonSection2}
         </div>
     </div>
-    { showPopup && <PopUp title={props.object.text} onClose={onClose}/>}
+    { showPopup && <PopUp title={props.object.text} onClose={onClose} descriptionFunc={handleTileDescription} desc={tileDescription}/>}
 </>
 );
 }

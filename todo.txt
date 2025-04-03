@@ -1,0 +1,40 @@
+1. Learn C# and .NET basics
+Variables, types, functions, classes (C#)
+
+What .NET is
+
+Understand what Controllers, Models, Projects are
+
+Learn ASP.NET Core basics (used to build APIs)
+
+2. Set up a basic REST API
+Install .NET SDK + Visual Studio or VS Code
+
+Create a new project: dotnet new webapi
+
+Make a TodoController for GET/POST/PUT/DELETE
+
+Test endpoints using Postman
+
+3. Add a database
+Use Entity Framework Core (EF Core)
+
+Start with SQLite (easy), can switch to PostgreSQL later
+
+Create models like Todo.cs
+
+Learn migrations and how to update DB schema
+
+4. Plan your data model
+Todo: id, text, desc, type, sheetId, columnIndex
+
+Sheet: id, name
+
+Optional later: userId, Kanban columns, etc.
+
+5. Connect frontend to backend
+Replace useState with API calls in React
+
+Use fetch or axios for GET, POST, PUT, DELETE
+
+Data now saved on server, not in memory

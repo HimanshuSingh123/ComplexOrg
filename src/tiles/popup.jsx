@@ -8,12 +8,23 @@ function PopUp(props){
 
     const [isOpen, setIsOpen] = useState(false);
 
-    const [Description, setDescription] = useState('')
     const [images, setImages] = useState([]);
     const [links, setLinks] = useState([]);
 
     const openFunction = () => { 
-        setIsOpen(!false)
+        setIsOpen(true);
+    }
+
+    const handleDesc = (text) => {
+      props.descriptionFunc(text)
+    }
+
+    const retrieveDesc = () => {
+      if(props.desc){
+        return props.desc;
+      } else {
+        return '';
+      }
     }
 
     useEffect(() => {
@@ -32,7 +43,7 @@ function PopUp(props){
               </div>
         
               <div className="popupDescription">
-                <textarea className="mainInput" placeholder="Add Information..." />
+                <textarea value={retrieveDesc()} onChange={e => handleDesc(e.target.value)} className="mainInput" placeholder="Add Information..." />
               </div>
         
               <div className="supportInput">
