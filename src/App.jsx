@@ -5,48 +5,46 @@ import { use } from 'react'
 import Tile from './tiles/added'
 
 function App() {
-  const [todos, setTodoList] = useState([]);
-  const [dones, setDoneList] = useState([]);
+  const [masterList, setMasterList] = useState([]);
+  const todos = masterList.filter(t => !t.completed);
+  const dones = masterList.filter(t => t.completed);
   const [value, setValue] = useState("");
-  
+
+
   const handleInput = () => {
     alert('inside handleInput!');
     if(value.trim() === "") return;
-    setTodoList([...todos, packageV(value, 1)]);
+    setMasterList([...masterList, packageV(value)]);
+    // api would probably go somewhere here?
     setValue("");
   }
 
-  const packageV = (value, button) => {
-    return {id:Date.now(), text:value, type:button}
+  const packageV = (value) => {
+    return {id:Date.now(), text:value, completed:false, description : "", images : [], links: []}
   }
 
-  const addToDoneList = (existingItem) => {
-    const exists = dones.some(done => done.id === existingItem.id);
-    existingItem.type = 2;
-    if(exists){
-        alert("item already exists within done list!");
-        return;
-    }
-    setDoneList(dones => [...dones, existingItem]);
+  const switchList = (existingItem) => {
+    setMasterList(prev => prev.map(
+      task => task.id === existingItem.id ? 
+      {...task, completed: !task.completed} : task
+    ))
   }
 
-  const addToTodoList = (existingItem) => {
-    const exists = todos.some(todo => todo.id === existingItem.id);
-    existingItem.type = 1;
-    if(exists){
-      alert('item already in todo list!');
-      return;
-    }
-    setTodoList(todos => [...todos, existingItem]);
-  }
-  
-  const removeFromTodoList = (existingItem) => {
-    setTodoList(todos => todos.filter(todo => todo.id !== existingItem.id))
+//.map()	Transform each item in an array	🔁 New array (same length)
+//.filter()	Remove some items based on a condition	🔁 New array (shorter or same)
+//.some()	Check if at least one item passes a condition	✅ true or false
+
+  const updateDescription = (existingItem, text) => {
+    setMasterList(prev => prev.map(
+      task => task.id === existingItem.id ? 
+      {...task, description: text} : task
+    ))
   }
 
-  const removeFromDoneList = (existingItem) => {
-    setDoneList(dones => dones.filter(done => done.id !== existingItem.id));
+  const removeTask = (taskId) => {
+    setMasterList(prev => prev.filter(task => task.id !== taskId));
   }
+
 
   return (
     <div className='App'>
@@ -88,9 +86,9 @@ function App() {
                             {
                             <Tile 
                             object={todo} 
-                            addToDoneList={addToDoneList}
-                            removeFromTodoList={removeFromTodoList}
-                            type={1}
+                            switchListFunc={switchList}
+                            updateDescription={updateDescription}
+                            removeTask={removeTask}
                             />
                             }
                             </li>)}
@@ -102,9 +100,9 @@ function App() {
                             {
                             <Tile 
                             object={done} 
-                            addToTodoList={addToTodoList}
-                            removeFromDoneList={removeFromDoneList}
-                            type={2}
+                            switchListFunc={switchList}
+                            updateDescription={updateDescription}
+                            removeTask={removeTask}
                             />
                             }
                             </li>)}

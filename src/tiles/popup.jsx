@@ -15,8 +15,8 @@ function PopUp(props){
         setIsOpen(true);
     }
 
-    const handleDesc = (text) => {
-      props.descriptionFunc(text)
+    const handleDesc = (task, text) => {
+      props.descriptionFunc(task, text);
     }
 
     const retrieveDesc = () => {
@@ -43,7 +43,7 @@ function PopUp(props){
               </div>
         
               <div className="popupDescription">
-                <textarea value={retrieveDesc()} onChange={e => handleDesc(e.target.value)} className="mainInput" placeholder="Add Information..." />
+                <textarea value={retrieveDesc()} onChange={e => handleDesc(props.task, e.target.value)} className="mainInput" placeholder="Add Information..." />
               </div>
         
               <div className="supportInput">

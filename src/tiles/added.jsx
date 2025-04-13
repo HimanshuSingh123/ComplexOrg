@@ -11,22 +11,18 @@ let buttonSection2;
 const [showPopup, setShowPopup] = useState(false);
 const [tileDescription, setTileDescription] = useState('');
 
-const handleTileDescription = (text) => {
-    setTileDescription(text)
-}
 
 const onClose = () =>{
     setShowPopup(false);
 }
 
-console.log(props.type)
-if(props.type === 1){
+console.log(props.object.completed)
+if(props.object.completed === false){
     buttonSection = (
     <div className='checkButton'>
         <button className='checkB' onClick={
             () => {
-            props.addToDoneList(props.object);
-            props.removeFromTodoList(props.object);
+            props.switchListFunc(props.object);
             }
         }>✔</button>
     </div>
@@ -35,19 +31,18 @@ if(props.type === 1){
         <div className='removeButton'>
             <button className='removeB' onClick={
                 () => {
-                    props.removeFromTodoList(props.object);
+                    props.removeTask(props.object.id);
                 }
             }>✘</button>
         </div>
     );
 } 
-else if(props.type === 2){
+else if(props.object.completed === true){
     buttonSection = (
         <div className='undoButton'>
             <button className='undoB' onClick={
                 () => {
-                    props.addToTodoList(props.object);
-                    props.removeFromDoneList(props.object);
+                    props.switchListFunc(props.object);
                 }
             }>↑</button>
         </div>
@@ -56,7 +51,7 @@ else if(props.type === 2){
         <div className='removeButton'>
             <button className='removeB' onClick={
                 () => {
-                    props.removeFromDoneList(props.object);
+                    props.removeTask(props.object.id);
                 }
             }>✘</button>
         </div>
@@ -74,7 +69,7 @@ return(
             {buttonSection2}
         </div>
     </div>
-    { showPopup && <PopUp title={props.object.text} onClose={onClose} descriptionFunc={handleTileDescription} desc={tileDescription}/>}
+    { showPopup && <PopUp title={props.object.text} onClose={onClose} descriptionFunc={props.updateDescription} desc={props.object.description} task={props.object}/>}
 </>
 );
 }
