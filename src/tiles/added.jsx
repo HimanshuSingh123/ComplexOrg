@@ -9,7 +9,6 @@ function Tile(props){
 let buttonSection;
 let buttonSection2;
 const [showPopup, setShowPopup] = useState(false);
-const [tileDescription, setTileDescription] = useState('');
 
 
 const onClose = () =>{
