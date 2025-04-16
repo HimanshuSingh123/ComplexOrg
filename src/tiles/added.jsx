@@ -68,7 +68,13 @@ return(
             {buttonSection2}
         </div>
     </div>
-    { showPopup && <PopUp title={props.object.text} onClose={onClose} descriptionFunc={props.updateDescription} desc={props.object.description} task={props.object}/>}
+    { showPopup && 
+    <PopUp title={props.object.text}
+     onClose={onClose}
+     descriptionFunc={props.updateDescription}
+     desc={props.object.description}
+     task={props.object}
+    />}
 </>
 );
 }

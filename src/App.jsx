@@ -30,6 +30,24 @@ function App() {
     ))
   }
 
+  const packageImage = (filename, path, uploadDate) => {
+    return {
+        id : `Image-${Date.now()}`,
+        filename: filename,
+        path: path,
+        uploadDate: uploadDate
+    };
+  }
+
+  const appendImage = (existingItem, filename, path, uploadDate) => {
+    let packagedImage = packageImage(filename, path, uploadDate);
+    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links: [...task.links, packagedImage]} : task));
+  }
+
+  const removeImage = (existingItem, existingImageId) => {
+    setMasterList(prev => prev.map(task => existingItem.id === task.id ? {...task, links: task.links.filter(image => image.id !== existingImageId)} : task));
+  }
+
 //.map()	Transform each item in an array	🔁 New array (same length)
 //.filter()	Remove some items based on a condition	🔁 New array (shorter or same)
 //.some()	Check if at least one item passes a condition	✅ true or false
