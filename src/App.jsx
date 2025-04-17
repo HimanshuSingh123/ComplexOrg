@@ -3,6 +3,7 @@ import reactLogo from './assets/react.svg'
 import './App.css'
 import { use } from 'react'
 import Tile from './tiles/added'
+import { TaskContent } from './TaskContext'
 
 function App() {
   const [masterList, setMasterList] = useState([]);
@@ -65,6 +66,10 @@ function App() {
 
 
   return (
+    <TaskContent.Provider value={{
+      appendImage,
+      removeImage
+    }}>
     <div className='App'>
       <div className="navBar">
             <nav>
@@ -131,6 +136,7 @@ function App() {
 
         </div>
       </div>
+      </TaskContent.Provider>
   )
 }
 

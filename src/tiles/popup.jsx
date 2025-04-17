@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
 import ReactDOM from 'react-dom'
 import "./css/popup.css"
+import { useTaskContent } from "../TaskContext"
 
 function PopUp(props){
+
+    const {appendImage, removeImage} = useTaskContent();
 
     const title = props.title
 
