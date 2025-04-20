@@ -5,7 +5,7 @@ import { useTaskContent } from "../TaskContext"
 
 function PopUp(props){
 
-    const {appendImage, removeImage} = useTaskContent();
+    const {appendImage, removeImage, appendLink, removeLink, getAllLinks, getAllImages} = useTaskContent();
 
     const title = props.title
 
@@ -51,7 +51,7 @@ function PopUp(props){
         
               <div className="supportInput">
                 <div className="popupImages">
-                  {/* Image content here */}
+                  <input type="file" accept="image/*" onChange={e => appendImage(e, props.task)}></input>
                 </div>
         
                 <div className="popupLinks">

@@ -31,25 +31,30 @@ function App() {
     ))
   }
 
-  const packageImage = (filename, path, uploadDate) => {
+  const packageImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
     return {
         id : `Image-${Date.now()}`,
-        filename: filename,
-        path: path,
-        uploadDate: uploadDate
+        filename: file.name,
+        file: file,
+        uploadDate: new Date().toISOString(),
+        url: URL.createObjectURL(file)
     };
   }
 
-  const packageLink = (url, uploadDate) => {
+  const packageLink = (url) => {
     return {
       id: `Link-${Date.now()}`,
       url: url,
-      uploadDate: uploadDate
+      uploadDate: new Date().toISOString()
     };
   }
 
-  const appendImage = (existingItem, filename, path, uploadDate) => {
-    let packagedImage = packageImage(filename, path, uploadDate);
+  const appendImage = (e, existingItem) => {
+    let packagedImage = packageImage(e);
+    if (!packageImage) return;
+    console.log(getImagesForObject(existingItem));
     setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, images: [...task.images, packagedImage]} : task));
   }
 
@@ -58,8 +63,9 @@ function App() {
   }
 
   const appendLink = (url, uploadDate, existingItem) => {
-    let packageLink = packageLink(url, uploadDate);
-    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:[...task.links, packageLink]} : task))
+    let packagedLink = packageLink(url);
+    if (!packageLink) return;
+    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:[...task.links, packagedLink]} : task))
   }
 
   const removeLink = (existingItem, existingLinkId) => {
@@ -69,6 +75,7 @@ function App() {
 //.map()	Transform each item in an array	🔁 New array (same length)
 //.filter()	Remove some items based on a condition	🔁 New array (shorter or same)
 //.some()	Check if at least one item passes a condition	✅ true or false
+//find() returns the first item in an array that satisfies a condition — or undefined if no match is found.
 
   const updateDescription = (existingItem, text) => {
     setMasterList(prev => prev.map(
@@ -81,13 +88,32 @@ function App() {
     setMasterList(prev => prev.filter(task => task.id !== taskId));
   }
 
+  const getAllImages = () => {
+    return masterList.flatMap(task => task.images);
+  }
+
+  const getAllLinks = () => {
+    return masterList.flatMap(task => task.links);
+  }
+
+  const getLinksForObject = (existingItem) => {
+    return masterList.filter(task => task.id === existingItem.id).flatMap(task => task.links);
+  }
+
+  const getImagesForObject = (existingItem) => {
+    let task = masterList.find(task => task.id === existingItem.id);
+    return task ? task.images : [];
+  }
+
 
   return (
     <TaskContent.Provider value={{
       appendImage,
       removeImage, 
       appendLink, 
-      removeLink
+      removeLink,
+      getAllImages,
+      getAllLinks
     }}>
     <div className='App'>
       <div className="navBar">

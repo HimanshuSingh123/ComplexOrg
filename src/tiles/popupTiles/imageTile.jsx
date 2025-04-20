@@ -17,3 +17,5 @@ function imageTile(props) {
         </div>
     )
 }
+
+export default imageTile
