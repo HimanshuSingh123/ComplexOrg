@@ -40,13 +40,30 @@ function App() {
     };
   }
 
+  const packageLink = (url, uploadDate) => {
+    return {
+      id: `Link-${Date.now()}`,
+      url: url,
+      uploadDate: uploadDate
+    };
+  }
+
   const appendImage = (existingItem, filename, path, uploadDate) => {
     let packagedImage = packageImage(filename, path, uploadDate);
-    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links: [...task.links, packagedImage]} : task));
+    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, images: [...task.images, packagedImage]} : task));
   }
 
   const removeImage = (existingItem, existingImageId) => {
-    setMasterList(prev => prev.map(task => existingItem.id === task.id ? {...task, links: task.links.filter(image => image.id !== existingImageId)} : task));
+    setMasterList(prev => prev.map(task => existingItem.id === task.id ? {...task, images: task.images.filter(image => image.id !== existingImageId)} : task));
+  }
+
+  const appendLink = (url, uploadDate, existingItem) => {
+    let packageLink = packageLink(url, uploadDate);
+    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:[...task.links, packageLink]} : task))
+  }
+
+  const removeLink = (existingItem, existingLinkId) => {
+    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:task.links.filter(link => link !== existingLinkId)} : task))
   }
 
 //.map()	Transform each item in an array	🔁 New array (same length)
@@ -68,7 +85,9 @@ function App() {
   return (
     <TaskContent.Provider value={{
       appendImage,
-      removeImage
+      removeImage, 
+      appendLink, 
+      removeLink
     }}>
     <div className='App'>
       <div className="navBar">
