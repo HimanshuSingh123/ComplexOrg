@@ -74,6 +74,7 @@ return(
      descriptionFunc={props.updateDescription}
      desc={props.object.description}
      task={props.object}
+     taskId={props.object.id}
     />}
 </>
 );

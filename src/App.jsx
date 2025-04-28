@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import './App.css'
 import { use } from 'react'
@@ -51,11 +51,30 @@ function App() {
     };
   }
 
+/*
+const appendImage = (e, existingItem) => {
+  const packagedImage = packageImage(e);
+  if (!packagedImage) return;
+
+  setMasterList(prev => {
+    // 🔍 Find the fresh version of the task
+    const freshTask = prev.find(task => task.id === existingItem.id);
+    const existingImages = freshTask?.images || [];
+
+    return prev.map(task =>
+      task.id === existingItem.id
+        ? { ...task, images: [...existingImages, packagedImage] }
+        : task
+    );
+  });
+};
+*/
+
   const appendImage = (e, existingItem) => {
     let packagedImage = packageImage(e);
-    if (!packageImage) return;
-    console.log(getImagesForObject(existingItem));
+    if (!packagedImage) return;
     setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, images: [...task.images, packagedImage]} : task));
+    console.log(getImagesForObject(existingItem));
   }
 
   const removeImage = (existingItem, existingImageId) => {
@@ -64,12 +83,16 @@ function App() {
 
   const appendLink = (url, uploadDate, existingItem) => {
     let packagedLink = packageLink(url);
-    if (!packageLink) return;
+    if (!packagedLink) return;
     setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:[...task.links, packagedLink]} : task))
   }
 
   const removeLink = (existingItem, existingLinkId) => {
     setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:task.links.filter(link => link !== existingLinkId)} : task))
+  }
+
+  const getTask = (existingItem) => {
+    return masterList.find(task => task.id === existingItem.id ? task : 'None');
   }
 
 //.map()	Transform each item in an array	🔁 New array (same length)
@@ -113,7 +136,10 @@ function App() {
       appendLink, 
       removeLink,
       getAllImages,
-      getAllLinks
+      getAllLinks,
+      getImagesForObject,
+      getTask,
+      masterList
     }}>
     <div className='App'>
       <div className="navBar">

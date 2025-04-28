@@ -1,18 +1,23 @@
 .imageTile{
-  width: 100%;
+  width: 170px;
   height: 50px;
   background-color: grey;
-  border-radius: 35px;
   
   display: flex;
   align-items: center;
   
-  margin: 5px 0;
-  padding: 0 10px;
+  border-bottom: solid;
 }
+
+.imageUl{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 .Icon{
   padding-left: 10px;
-  width: 93%;
+  padding-right: 10px;
 }
 .image{
   height: 20px;
