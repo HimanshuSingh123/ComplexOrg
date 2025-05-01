@@ -1,13 +1,15 @@
-import { useEffect, useState, useRef } from "react"
+import { useEffect, useState, useRef, isValidElement } from "react"
 import ReactDOM from 'react-dom'
 import "./css/popup.css"
 import { useTaskContent } from "../TaskContext"
 import { use } from "react";
 import ImageTile from "./popupTiles/imageTile";
+import LinkTile from "./popupTiles/linkTile";
+
 
 function PopUp(props){
 
-    const {appendImage, removeImage, appendLink, removeLink, masterList , getImagesForObject, getTask} = useTaskContent();
+    const {appendImage, appendLink, masterList , getImagesForObject, getLinksForObject, getTask} = useTaskContent();
 
     const title = props.title
 
@@ -15,6 +17,7 @@ function PopUp(props){
 
     const [images, setImages] = useState([]);
     const [links, setLinks] = useState([]);
+    const [value, setValue] = useState('');
 
     const fileInputRef = useRef();
 
@@ -27,13 +30,26 @@ function PopUp(props){
       const task = getTask(props.taskId);
       if(!task) return;
       console.log(getImagesForObject(props.task));
-    }, [masterList]);
+    }, [masterList]); //OPTIMIZE THESE USEEFFECTS!
 
     useEffect(() => {
       const task = getTask(props.task);
       if(!task) return;
       setImages(getImagesForObject(props.task))
-    }, [masterList])
+    }, [masterList]);
+
+    useEffect(() => {
+      const task = getTask(props.task);
+      if (!task) return;
+      console.log(getLinksForObject(props.task));
+    }, [masterList]);
+
+    useEffect(() => {
+      const task = getTask(props.task);
+      if(!task) return;
+      setLinks(getLinksForObject(props.task));
+      setValue('');
+    }, [masterList]);
 
     const handleDesc = (task, text) => {
       props.descriptionFunc(task, text);
@@ -45,6 +61,16 @@ function PopUp(props){
       } else {
         return '';
       }
+    }
+
+    const isValidURL = (text) => {
+      let url;
+      try{
+        url = new URL(text);
+      } catch {
+        return false;
+      }
+      return true;
     }
 
     useEffect(() => {
@@ -81,10 +107,33 @@ function PopUp(props){
                     </ul>
                   </div>
                 </div>
-                <div>
-                  <button>+</button>
+                <div className="linkDivSupport">
+                  <input type="text" 
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  onKeyDown={
+                    (e) => {
+                        if(e.key === "Enter"){
+                          if(value === ''){
+                            console.log('needs to be of some value for now...');
+                            return;
+                          }
+                          isValidURL(value) ? appendLink(value, props.task) : alert('invalid link!');
+                        }
+                      }
+                    } 
+                    className="linkInput"></input>
+                  <button onClick={() => {
+                    if(value === ''){
+                      console.log('needs to be of some value for now...');
+                      return;
+                    }
+                    isValidURL(value.trim()) ? appendLink(value, props.task) : alert('invalid link!');
+                  }}>+</button>
                   <div className="popupLinks">
-                    {/* Links content here */}
+                    <ul className="linkUl">
+                      {links.map((link, index) => <li key={index}><LinkTile link={link} task={props.task}/></li>)}
+                    </ul>
                   </div>
                 </div>
               </div>

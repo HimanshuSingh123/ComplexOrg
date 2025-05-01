@@ -81,14 +81,14 @@ const appendImage = (e, existingItem) => {
     setMasterList(prev => prev.map(task => existingItem.id === task.id ? {...task, images: task.images.filter(image => image.id !== existingImageId)} : task));
   }
 
-  const appendLink = (url, uploadDate, existingItem) => {
+  const appendLink = (url, existingItem) => {
     let packagedLink = packageLink(url);
     if (!packagedLink) return;
     setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:[...task.links, packagedLink]} : task))
   }
 
   const removeLink = (existingItem, existingLinkId) => {
-    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:task.links.filter(link => link !== existingLinkId)} : task))
+    setMasterList(prev => prev.map(task => task.id === existingItem.id ? {...task, links:task.links.filter(link => link.id !== existingLinkId)} : task))
   }
 
   const getTask = (existingItem) => {
@@ -120,7 +120,8 @@ const appendImage = (e, existingItem) => {
   }
 
   const getLinksForObject = (existingItem) => {
-    return masterList.filter(task => task.id === existingItem.id).flatMap(task => task.links);
+    const task = masterList.find(task => task.id === existingItem.id)
+    return task ? task.links : [];
   }
 
   const getImagesForObject = (existingItem) => {
@@ -138,6 +139,7 @@ const appendImage = (e, existingItem) => {
       getAllImages,
       getAllLinks,
       getImagesForObject,
+      getLinksForObject,
       getTask,
       masterList
     }}>

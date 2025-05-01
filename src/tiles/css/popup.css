@@ -70,7 +70,7 @@
 .popupLinks{
     background-color: white;
     height: 270px;
-    width: 130px;
+    max-width: 100%;
     border-style: solid;
-
 }
+

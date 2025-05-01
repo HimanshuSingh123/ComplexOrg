@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import ReactDOM from 'react-dom'
 import '../css/imageTile.css'
+import '../css/linkTile.css'
 import { useTaskContent } from "../../TaskContext";
 
 function ImageTile(props) {
@@ -11,11 +12,11 @@ function ImageTile(props) {
     }
 
     return (
-        <div class="imageTile">
+        <div class="linkTile">
         <div class="Icon">
             <img class="image" src={props.image.url}></img>
         </div>
-        <div className="imageName">{shortenImageName(props.image.filename)}</div>
+        <div className="">{shortenImageName(props.image.filename)}</div>
         <div class="remove">
             <button onClick={() => {removeImage(props.task, props.image.id)}}>
             X
