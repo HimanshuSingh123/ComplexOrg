@@ -73,6 +73,7 @@ nav{
   width: 700px;
   border-style: groove;
   border-color: aquamarine;
+  overflow-y: auto;
 }
 
 .DynamicUl{
@@ -90,4 +91,5 @@ nav{
   width: 700px;
   border-style: groove;
   border-color: aquamarine;
+  overflow-y: auto;
 }

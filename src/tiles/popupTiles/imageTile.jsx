@@ -8,11 +8,11 @@ function ImageTile(props) {
     const {removeImage} = useTaskContent();
 
     const shortenImageName = (filename) => {
-        return filename.length > 15 ? `${filename.slice(0, 12)}...` : filename;
+        return filename.length > 10 ? `${filename.slice(0, 8)}...` : filename;
     }
 
     return (
-        <div class="linkTile">
+        <div class="imageTile">
         <div class="Icon">
             <img class="image" src={props.image.url}></img>
         </div>
