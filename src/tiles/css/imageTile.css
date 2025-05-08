@@ -23,4 +23,26 @@
   height: 20px;
   width: 20px;
   object-fit: cover;
+  user-select: none;
+}
+
+.textArea{
+  user-select: none;
+}
+
+.remove{
+  user-select: none;
+}
+
+.closeImagePopupDiv{
+  display: flex;
+  justify-content: center;
+}
+
+.closeImagePopup{
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+  border: solid;
+  border-color: red;
 }

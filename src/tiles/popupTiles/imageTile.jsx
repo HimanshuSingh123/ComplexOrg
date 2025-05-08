@@ -12,11 +12,11 @@ function ImageTile(props) {
     }
 
     return (
-        <div class="imageTile">
+        <div class="imageTile" onClick={() => {console.log('ee'); props.setImage(props.image.url)}}>
         <div class="Icon">
             <img class="image" src={props.image.url}></img>
         </div>
-        <div className="">{shortenImageName(props.image.filename)}</div>
+        <div className="textArea">{shortenImageName(props.image.filename)}</div>
         <div class="remove">
             <button onClick={() => {removeImage(props.task, props.image.id)}}>
             X

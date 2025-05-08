@@ -18,12 +18,22 @@ function PopUp(props){
     const [images, setImages] = useState([]);
     const [links, setLinks] = useState([]);
     const [value, setValue] = useState('');
+    const [image, setImage] = useState('');
+    const [openImage, setOpenImage] = useState(false);
 
     const fileInputRef = useRef();
 
     const openFunction = () => { 
         setIsOpen(true);
     }
+
+    useEffect(() => {
+      if(image){
+        setOpenImage(true);
+      } else {
+        setOpenImage(false)
+      }
+    }, [image])
 
     
     useEffect(() => {
@@ -79,7 +89,9 @@ function PopUp(props){
 
     return ReactDOM.createPortal(
         isOpen && <div onClick={props.onClose} className="popupOverlay">
+          
             <div className="popup" onClick={e => e.stopPropagation()}>
+              <div className="popupContent">
               <div className="navBar">
                 <button onClick={props.onClose} >Ⓧ</button>
               </div>
@@ -102,6 +114,7 @@ function PopUp(props){
                         <ImageTile
                         task={props.task}
                         image={image}
+                        setImage={setImage}
                         />
                         </li>)}
                     </ul>
@@ -137,6 +150,15 @@ function PopUp(props){
                   </div>
                 </div>
               </div>
+              </div>
+              {openImage && 
+                <div className="imagePopup">
+                  <img className="selectedImage" src={image}/>
+                  <div className="closeImagePopupDiv">
+                    <button onClick={() => {setImage('')}} className="closeImagePopup">X</button>
+                    </div>
+                </div>
+              }
           </div>
         </div>,
         document.getElementById('modal-root')

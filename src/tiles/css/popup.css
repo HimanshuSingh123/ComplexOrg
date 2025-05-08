@@ -9,6 +9,7 @@
   border: 2px solid black;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,0.4);
+  display: flex;
 }
 
 .popupOverlay{
@@ -58,6 +59,7 @@
   gap: 20px;
   width: 100%;
   justify-content: center;
+  margin-right: 50px;
 }
 .popupImages{
     background-color: white;
@@ -75,5 +77,19 @@
     max-width: 100%;
     border-style: solid;
     overflow-y: auto;
+}
+.popupContent{
+  margin-right: 30px;
+}
+.imagePopup{
+  width: 300px;
+  border-left: solid;
+  padding-left: 30px;
+}
+
+.selectedImage{
+  width: 100%;
+  max-height:550px;
+  
 }
 
