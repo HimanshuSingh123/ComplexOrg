@@ -53,14 +53,15 @@
   background-color: white;
   border-radius: 10px;
 }
+
 .supportInput{
   display: flex;
   margin-top: 10px;
   gap: 20px;
   width: 100%;
   justify-content: center;
-  margin-right: 50px;
 }
+
 .popupImages{
     background-color: white;
     height: 270px;
@@ -78,9 +79,7 @@
     border-style: solid;
     overflow-y: auto;
 }
-.popupContent{
-  margin-right: 30px;
-}
+
 .imagePopup{
   width: 300px;
   border-left: solid;

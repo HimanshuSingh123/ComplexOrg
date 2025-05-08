@@ -91,7 +91,7 @@ function PopUp(props){
         isOpen && <div onClick={props.onClose} className="popupOverlay">
           
             <div className="popup" onClick={e => e.stopPropagation()}>
-              <div className="popupContent">
+              <div style={openImage ? {marginRight: '30px'} : {}}>
               <div className="navBar">
                 <button onClick={props.onClose} >Ⓧ</button>
               </div>
@@ -104,7 +104,7 @@ function PopUp(props){
                 <textarea value={retrieveDesc()} onChange={e => handleDesc(props.task, e.target.value)} className="mainInput" placeholder="Add Information..." />
               </div>
         
-              <div className="supportInput">
+              <div className="supportInput" style={openImage ? {marginRight: '50px'} : {}}>
                 <div>
                 <button onClick={() => fileInputRef.current.click()}>+</button>
                 <input type="file" accept="image/*" onChange={e => appendImage(e, props.task)} style={{display : "none"}} ref={fileInputRef}></input>
